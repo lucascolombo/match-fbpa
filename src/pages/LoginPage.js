@@ -160,7 +160,9 @@ class LoginPage extends Component {
 		return(
 			<View style={styles.wrapper}>
 				<View style={styles.logo}>
-					<Image source={ require('../../assets/logotipo.png') } />
+					<Image
+						source={ require('../../assets/logotipo.png') }
+						/>
 				</View>
 
 				<View style={styles.tabs}>
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#6b9b37',
 		paddingLeft: 15,
-		paddingRight: 25,
+		paddingRight: 15,
 		paddingTop: 10,
 		paddingBottom: 10,
 		fontSize: 18
@@ -267,7 +269,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#00796b',
 		borderRadius: 5,
 		paddingLeft: 15,
-		paddingRight: 25,
+		paddingRight: 15,
 		paddingTop: 10,
 		paddingBottom: 10
 	},
