@@ -126,7 +126,7 @@ class MatchFormPage extends Component {
 
 		this.props.saveMatch( newMatch )
 		.then(() => {
-			this.props.navigation.replace('Main');
+			this.props.navigation.goBack();
 		})
 		.catch( () => {
 			this.setState( { loading: false } );

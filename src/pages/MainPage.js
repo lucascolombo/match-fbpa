@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -45,12 +45,34 @@ class MainPage extends Component {
 	renderCard(match) {
 		return (
 			<View style={styles.singleMatch} key={match.id}>
-				<Text style={styles.singleMatchTitle}>
-					{ match.address }
-				</Text>
-				<Text style={styles.singleMatchDate}>
-					{ match.datetime }
-				</Text>
+				<View style={styles.singleMatchTouchableContent}>
+					<View style={styles.singleMatchRow}>
+						<Icon
+							name='location-pin'
+							type='entypo'
+							color='#9ccc65'
+							iconStyle={{
+								fontSize: 16,
+								flex: 1,
+							}} />
+						<Text style={styles.singleMatchTitle}>
+							{ match.address }
+						</Text>
+					</View>
+					<View style={styles.singleMatchRow}>
+						<Icon
+							name='calendar'
+							type='entypo'
+							color='#cccccc'
+							iconStyle={{
+								fontSize: 12,
+								flex: 1,
+							}} />
+						<Text style={styles.singleMatchDate}>
+							{ match.datetime }
+						</Text>
+					</View>
+				</View>
 			</View>
 		);
 	}
@@ -78,8 +100,9 @@ class MainPage extends Component {
 						type='material-community'
   						color='#000000' />
 				</TouchableOpacity>
-
-				{ this.renderMatchList() }
+				<ScrollView>
+					{ this.renderMatchList() }
+				</ScrollView>
 			</View>
 		);
 	}
@@ -105,18 +128,27 @@ const styles = StyleSheet.create({
     	elevation: 1,
 	},
 	singleMatch: {
-		padding: 20,
-		borderBottomWidth: 2,
+		borderBottomWidth: 1,
 		borderBottomColor: '#cccccc',
+		flexDirection: 'row',
 	},
 	singleMatchTitle: {
-		fontSize: 16,
+		fontSize: 14,
 		color: '#666666',
 		marginBottom: 7,
+		paddingLeft: 5,
 	},
 	singleMatchDate: {
 		color: '#999999',
-		fontSize: 14,
+		fontSize: 11,
+		paddingLeft: 10,
+	},
+	singleMatchTouchableContent: {
+		padding: 10,
+		width: '90%'
+	},
+	singleMatchRow: {
+		flexDirection: 'row',
 	}
 });
 

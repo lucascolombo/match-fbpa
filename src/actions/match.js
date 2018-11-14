@@ -21,6 +21,6 @@ export const saveMatch = (match) => dispatch => {
 		.ref(`/matchs`)
 		.push(match)
 		.then(() => {
-			dispatch(clear);
+			dispatch(clear());
 		})
 }

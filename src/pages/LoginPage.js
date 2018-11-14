@@ -59,7 +59,7 @@ class LoginPage extends Component {
 		const { mail, password } = this.state;
 		const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-		if (mail.trim() === "" || !regexMail.test(mail))
+		if (mail.trim() === "")
 			errors.push("usuário");
 
 		if (password.trim() === "")
@@ -71,8 +71,21 @@ class LoginPage extends Component {
 		// }
 
 		if (errors.length > 0) {
-			validate = false;
-			this.setState( { response: `Preencha os campos corretamente: ${errors.join(', ')}` } );
+			this.setState( { response: `Preencha os campos: ${errors.join(', ')}!` } );
+
+			return false;
+		}
+
+		if (!regexMail.test(mail)) {
+			this.setState( { response: `Campo de usuário deve ser um e-mail!` } );
+
+			return false;
+		}
+
+		if (password.trim().length < 6) {
+			this.setState( { response: `Senha precisa ter pelo menos 6 caracteres!` } );
+
+			return false;
 		}
 
 		return validate;
@@ -100,6 +113,7 @@ class LoginPage extends Component {
 			this.redirectLogin();
 		})
 		.catch(error => {
+			console.log(error);
 			this.setState( { response: "Não foi possível realizar o cadastro!", loading: false } );
 		})
 	}
@@ -192,7 +206,9 @@ class LoginPage extends Component {
 							style={styles.input}
 							placeholder="seu.nome@email.com"
 							value={this.state.email}
-							onChangeText={ value => { this.onChangeText('mail', value) } } />
+							onChangeText={ value => { this.onChangeText('mail', value) } }
+							keyboardType="email-address"
+							autoCapitalize = 'none' />
 					</FormRow>
 
 					<FormRow label="Senha">
@@ -201,7 +217,8 @@ class LoginPage extends Component {
 							placeholder="*****************"
 							secureTextEntry={true}
 							value={this.state.password}
-							onChangeText={ value => { this.onChangeText('password', value) } } />
+							onChangeText={ value => { this.onChangeText('password', value) } }
+							autoCapitalize = 'none' />
 					</FormRow>
 
 					<FormRow>
@@ -233,7 +250,7 @@ class LoginPage extends Component {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		flex: 1
+		flex: 1,
 	},
 	container: {
 		paddingLeft: 25,
