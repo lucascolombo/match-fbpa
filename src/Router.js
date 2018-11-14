@@ -5,6 +5,16 @@ import MatchFormPage from './pages/MatchFormPage';
 import MapSetLocationPage from './pages/MapSetLocationPage';
 
 export default createStackNavigator({
+  'Login': {
+    screen: LoginPage,
+    navigationOptions: {
+      title: "",
+      headerTintColor: '#ffffff',
+      headerStyle: {
+        backgroundColor: null
+      }
+    }
+  },
   'Main': {
     screen: Main,
   },
@@ -18,16 +28,6 @@ export default createStackNavigator({
     screen: MapSetLocationPage,
     navigationOptions: {
       title: "Novo Jogo",
-    }
-  },
-  'Login': {
-    screen: LoginPage,
-    navigationOptions: {
-      title: "",
-      headerTintColor: '#ffffff',
-      headerStyle: {
-        backgroundColor: null
-      }
     }
   },
 }, {

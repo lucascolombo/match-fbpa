@@ -4,7 +4,7 @@ import {
 	View,
 	Text,
 	TextInput,
-	TouchableHighlight,
+	TouchableOpacity,
 	ActivityIndicator,
 	Image
 } from 'react-native';
@@ -30,12 +30,12 @@ class LoginPage extends Component {
 
 	componentWillMount() {
 		const config = {
-			apiKey: "AIzaSyBkz65k6fj4SzTq5zLXyfsQvYF5NQRolH8",
-			authDomain: "match-fbpa.firebaseapp.com",
-			databaseURL: "https://match-fbpa.firebaseio.com",
-			projectId: "match-fbpa",
-			storageBucket: "",
-			messagingSenderId: "573131318892"
+			apiKey: "AIzaSyCT5aNAFhLOdPIb50hyWXOIiAYeG4SnqGg",
+		    authDomain: "match-fbpa.firebaseapp.com",
+		    databaseURL: "https://match-fbpa.firebaseio.com",
+		    projectId: "match-fbpa",
+		    storageBucket: "match-fbpa.appspot.com",
+		    messagingSenderId: "573131318892"
 		};
 
 		firebase.initializeApp(config);
@@ -65,9 +65,10 @@ class LoginPage extends Component {
 		if (password.trim() === "")
 			errors.push("senha");
 
-		if (!this.state.loginForm) {
-
-		}
+		// if (!this.state.loginForm) {
+		// no futuro cadastrar telefone ?
+		// validar outros campos
+		// }
 
 		if (errors.length > 0) {
 			validate = false;
@@ -111,7 +112,7 @@ class LoginPage extends Component {
 		let label = this.state.loginForm ? 'Acessar' : 'Registrar';
 
 		return (
-			<TouchableHighlight
+			<TouchableOpacity
 				style={styles.button}
 				onPress={
 					() => {
@@ -125,7 +126,7 @@ class LoginPage extends Component {
 				}
 				>
 				<Text style={styles.buttonText}>{label}</Text>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		);
 	}
 

@@ -1,11 +1,11 @@
 import { SET_FIELD, CLEAR } from '../actions';
+import moment from 'moment';
 
 const defaultState = {
 	address: '',
 	latitude: 0,
 	longitude: 0,
-	data: null,
-	hour: null,
+	datetime: moment().format('DD/MM/YYYY HH:mm'),
 	players: 9,
 };
 

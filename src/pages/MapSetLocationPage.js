@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableHighlight, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Icon } from 'react-native-elements';
@@ -24,6 +24,9 @@ class MapSetLocationPage extends Component {
 	}
 
 	componentWillMount(nextProps, props) {
+		if (this.props.user === null)
+			this.props.navigation.replace('Login');
+
 		if ( this.props.address !== '' && this.props.latitude !== 0 && this.props.longitude !== 0 ) {
 			this.onChangeAddress(
 				this.props.address,
@@ -124,7 +127,7 @@ class MapSetLocationPage extends Component {
 				    />
 				</View>
 
-				<TouchableHighlight
+				<TouchableOpacity
 					style={styles.fab}
 					onPress={ () => { this.setLocation(); } }
 					>
@@ -132,7 +135,7 @@ class MapSetLocationPage extends Component {
 						name='check'
 						type='material-community'
   						color='#000000' />
-				</TouchableHighlight>
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -175,6 +178,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
 	return {
+		user: state.user,
 		address: state.match.address,
 		latitude: state.match.latitude,
 		longitude: state.match.longitude
