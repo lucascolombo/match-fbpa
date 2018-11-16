@@ -20,11 +20,18 @@ export const doLogin = ({ mail, password }) => dispatch => {
 		})
 }
 
-export const register = ({ mail, password }) => dispatch => {
+export const register = ({ name, mail, password }) => dispatch => {
 	return firebase
 		.auth()
 		.createUserWithEmailAndPassword(mail, password)
 		.then(user => {
-			dispatch(login(user));
+			const newUser = firebase.auth().currentUser;
+
+			newUser
+			.updateProfile({
+				displayName: name
+			});
+
+			dispatch(login(user))
 		})
 }

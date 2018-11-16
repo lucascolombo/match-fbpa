@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
 	StyleSheet,
 	View,
+	ScrollView,
 	Text,
 	TextInput,
 	TouchableOpacity,
@@ -20,12 +21,15 @@ class LoginPage extends Component {
 		super(props);
 
 		this.state = {
+			name: '',
 			mail: '',
 			password: '',
 			loading: false,
 			response: null,
 			loginForm: true
 		}
+
+		this.renderNameField = this.renderNameField.bind(this);
 	}
 
 	componentWillMount() {
@@ -56,7 +60,7 @@ class LoginPage extends Component {
 	validate() {
 		let validate = true;
 		let errors = [];
-		const { mail, password } = this.state;
+		const { name, mail, password } = this.state;
 		const regexMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 		if (mail.trim() === "")
@@ -65,10 +69,10 @@ class LoginPage extends Component {
 		if (password.trim() === "")
 			errors.push("senha");
 
-		// if (!this.state.loginForm) {
-		// no futuro cadastrar telefone ?
-		// validar outros campos
-		// }
+		if (!this.state.loginForm) {
+			if (name.trim() === "")
+				errors.push("nome");
+		}
 
 		if (errors.length > 0) {
 			this.setState( { response: `Preencha os campos: ${errors.join(', ')}!` } );
@@ -105,15 +109,14 @@ class LoginPage extends Component {
 	}
 
 	doRegister() {
-		const { mail, password } = this.state;
+		const { name, mail, password } = this.state;
 		this.setState( { loading: true, response: null } );
 
-		this.props.register({ mail, password })
+		this.props.register({ name, mail, password })
 		.then(() => {
 			this.redirectLogin();
 		})
 		.catch(error => {
-			console.log(error);
 			this.setState( { response: "Não foi possível realizar o cadastro!", loading: false } );
 		})
 	}
@@ -171,9 +174,24 @@ class LoginPage extends Component {
 		return newStyles;
 	}
 
+	renderNameField() {
+		if (this.state.loginForm)
+			return null;
+
+		return (
+			<FormRow label="Usuário">
+				<TextInput
+					style={styles.input}
+					placeholder="Seu Nome"
+					value={this.state.name}
+					onChangeText={ value => { this.onChangeText('name', value) } }/>
+			</FormRow>
+		);
+	}
+
 	render() {
 		return(
-			<View style={styles.wrapper}>
+			<ScrollView style={styles.wrapper}>
 				<View style={styles.logo}>
 					<Image
 						source={ require('../../assets/logotipo.png') }
@@ -201,6 +219,8 @@ class LoginPage extends Component {
 				{ this.renderResponse() }
 
 				<View style={styles.container}>
+					{ this.renderNameField() }
+
 					<FormRow label="Usuário">
 						<TextInput
 							style={styles.input}
@@ -225,7 +245,7 @@ class LoginPage extends Component {
 						{ this.renderLoginButton() }
 					</FormRow>
 				</View>
-			</View>
+			</ScrollView>
 		);
 	}
 }

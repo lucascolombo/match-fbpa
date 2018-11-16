@@ -7,6 +7,7 @@ const defaultState = {
 	longitude: 0,
 	datetime: moment().format('DD/MM/YYYY HH:mm'),
 	players: 9,
+	price: 10
 };
 
 export default function match(state = defaultState, action) {

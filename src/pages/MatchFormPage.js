@@ -91,10 +91,11 @@ class MatchFormPage extends Component {
 						borderWidth: 0,
 						margin: 0,
 						padding: 0,
+						alignItems: 'flex-start',
 					},
 					dateTouchBody: {
     					paddingTop: 20,
-					}
+					},
 				}}
 				showIcon={false}
 				onDateChange={
@@ -214,6 +215,32 @@ class MatchFormPage extends Component {
 							position: 'absolute'
 						}} />
 				</View>
+				<View style={[ styles.line, styles.customContent]}>
+					<Text style={styles.fieldLabel}>
+						Quanto?
+					</Text>
+					<TextInput
+						style={styles.input}
+						value={this.props.match.price.toString()}
+						onChangeText={ value => { this.props.setField('price', value); } }
+						keyboardType="decimal-pad" />
+					<Icon
+						name='attach-money'
+						type='MaterialIcons'
+						iconStyle={{
+							fontSize: 30,
+						}}
+						color='#cccccc'
+						containerStyle={{
+							flex: 1,
+							right: 0,
+							padding: 5,
+							paddingRight: 4,
+							marginRight: 9,
+							marginTop: 8,
+							position: 'absolute'
+						}} />
+				</View>
 				<View>
 					<Text style={styles.countLabel}>
 						Quantos jogadores faltam?
@@ -261,7 +288,6 @@ const styles = StyleSheet.create({
 	},
 	fieldLabel: {
 		color: '#999999',
-		flex: 1,
 		paddingTop: 20,
 		paddingLeft: 20,
 		paddingRight: 20,
@@ -320,6 +346,12 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		textAlign: 'center',
 	},
+	input: {
+		backgroundColor: 'transparent',
+		color: '#333333',
+		flex: 1,
+		paddingLeft: 5,
+	}
 });
 
 const mapStateToProps = (state) => {

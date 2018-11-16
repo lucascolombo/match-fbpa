@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import Main from './pages/MainPage';
 import MatchFormPage from './pages/MatchFormPage';
 import MapSetLocationPage from './pages/MapSetLocationPage';
+import MatchDetailPage from './pages/MatchDetailPage';
 
 export default createStackNavigator({
   'Login': {
@@ -17,6 +18,12 @@ export default createStackNavigator({
   },
   'Main': {
     screen: Main,
+  },
+  'MatchDetail': {
+    screen: MatchDetailPage,
+    navigationOptions: {
+      title: "Detalhes do Jogo",
+    }
   },
   'MatchForm': {
     screen: MatchFormPage,

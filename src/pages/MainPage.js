@@ -44,7 +44,11 @@ class MainPage extends Component {
 
 	renderCard(match) {
 		return (
-			<View style={styles.singleMatch} key={match.id}>
+			<TouchableOpacity
+				style={styles.singleMatch}
+				key={match.id}
+				onPress={ () => { this.props.navigation.navigate('MatchDetail', { match }); } }
+				>
 				<View style={styles.singleMatchTouchableContent}>
 					<View style={styles.singleMatchRow}>
 						<Icon
@@ -59,21 +63,41 @@ class MainPage extends Component {
 							{ match.address }
 						</Text>
 					</View>
+
 					<View style={styles.singleMatchRow}>
 						<Icon
 							name='calendar'
 							type='entypo'
 							color='#cccccc'
-							iconStyle={{
-								fontSize: 12,
-								flex: 1,
-							}} />
+							iconStyle={styles.littleIcon} />
 						<Text style={styles.singleMatchDate}>
 							{ match.datetime }
 						</Text>
 					</View>
+
+					<View style={styles.singleMatchRow}>
+						<Icon
+							name='attach-money'
+							type='MaterialIcons'
+							color='#cccccc'
+							iconStyle={[styles.littleIcon, { paddingTop: 1, }]} />
+						<Text style={styles.singleMatchPrice}>
+							{ ( match.price === "" || parseFloat(match.price) === 0 ? 'Grátis' : match.price) }
+						</Text>
+					</View>
+
+					<View style={styles.singleMatchRow}>
+						<Icon
+							name='users'
+							type='entypo'
+							color='#cccccc'
+							iconStyle={[styles.littleIcon, { paddingTop: 1, }]} />
+						<Text style={styles.singleMatchPlayers}>
+							{`${match.confirmedPlayers.length} jogador(es) confirmado(s)`}
+						</Text>
+					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
 	}
 
@@ -87,6 +111,10 @@ class MainPage extends Component {
 
 		return (
 			<View style={styles.container}>
+				<ScrollView style={styles.scrollView}>
+					{ this.renderMatchList() }
+				</ScrollView>
+
 				<TouchableOpacity
 					style={styles.fab}
 					onPress={
@@ -100,9 +128,6 @@ class MainPage extends Component {
 						type='material-community'
   						color='#000000' />
 				</TouchableOpacity>
-				<ScrollView>
-					{ this.renderMatchList() }
-				</ScrollView>
 			</View>
 		);
 	}
@@ -113,6 +138,9 @@ const styles = StyleSheet.create({
 		padding: 25,
 	},
 	container: {
+		flex: 1,
+	},
+	scrollView: {
 		flex: 1,
 	},
 	fab: {
@@ -133,15 +161,25 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	singleMatchTitle: {
-		fontSize: 14,
+		fontSize: 11,
 		color: '#666666',
-		marginBottom: 7,
+		marginBottom: 5,
 		paddingLeft: 5,
 	},
 	singleMatchDate: {
 		color: '#999999',
 		fontSize: 11,
-		paddingLeft: 10,
+		paddingLeft: 7,
+	},
+	singleMatchPlayers: {
+		color: '#999999',
+		fontSize: 11,
+		paddingLeft: 7,
+	},
+	singleMatchPrice: {
+		color: '#00796b',
+		fontSize: 11,
+		paddingLeft: 7,
 	},
 	singleMatchTouchableContent: {
 		padding: 10,
@@ -149,6 +187,11 @@ const styles = StyleSheet.create({
 	},
 	singleMatchRow: {
 		flexDirection: 'row',
+	},
+	littleIcon: {
+		fontSize: 12,
+		flex: 1,
+		marginLeft: 3,
 	}
 });
 
