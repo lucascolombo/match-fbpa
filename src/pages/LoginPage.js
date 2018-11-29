@@ -271,6 +271,7 @@ class LoginPage extends Component {
 const styles = StyleSheet.create({
 	wrapper: {
 		flex: 1,
+		paddingTop: 50,
 	},
 	container: {
 		paddingLeft: 25,

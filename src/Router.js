@@ -4,16 +4,13 @@ import Main from './pages/MainPage';
 import MatchFormPage from './pages/MatchFormPage';
 import MapSetLocationPage from './pages/MapSetLocationPage';
 import MatchDetailPage from './pages/MatchDetailPage';
+import LocationMapPage from './pages/LocationMapPage';
 
 export default createStackNavigator({
   'Login': {
     screen: LoginPage,
     navigationOptions: {
-      title: "",
-      headerTintColor: '#ffffff',
-      headerStyle: {
-        backgroundColor: null
-      }
+      header: null
     }
   },
   'Main': {
@@ -23,6 +20,12 @@ export default createStackNavigator({
     screen: MatchDetailPage,
     navigationOptions: {
       title: "Detalhes do Jogo",
+    }
+  },
+  'LocationMap': {
+    screen: LocationMapPage,
+    navigationOptions: {
+      title: "Local do Jogo",
     }
   },
   'MatchForm': {

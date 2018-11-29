@@ -25,12 +25,15 @@ export const register = ({ name, mail, password }) => dispatch => {
 		.auth()
 		.createUserWithEmailAndPassword(mail, password)
 		.then(user => {
-			const newUser = firebase.auth().currentUser;
+			let newUser = {
+				uid: firebase.auth().currentUser.uid,
+				name: name
+			};
 
-			newUser
-			.updateProfile({
-				displayName: name
-			});
+			firebase
+			.database()
+			.ref(`/users`)
+			.push(newUser);
 
 			dispatch(login(user))
 		})
