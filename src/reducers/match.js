@@ -6,7 +6,7 @@ const defaultState = {
 	latitude: 0,
 	longitude: 0,
 	datetime: moment().format('DD/MM/YYYY HH:mm'),
-	players: 9,
+	players: 12,
 	price: 10
 };
 

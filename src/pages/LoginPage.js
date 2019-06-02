@@ -34,15 +34,19 @@ class LoginPage extends Component {
 
 	componentWillMount() {
 		const config = {
-			apiKey: "AIzaSyCT5aNAFhLOdPIb50hyWXOIiAYeG4SnqGg",
-		    authDomain: "match-fbpa.firebaseapp.com",
-		    databaseURL: "https://match-fbpa.firebaseio.com",
-		    projectId: "match-fbpa",
-		    storageBucket: "match-fbpa.appspot.com",
-		    messagingSenderId: "573131318892"
+			apiKey: "AIzaSyA2Qwl2FLPUl66VNcsCilnqAOtsYih_UIM",
+  			authDomain: "vollers-a7c79.firebaseapp.com",
+  			databaseURL: "https://vollers-a7c79.firebaseio.com",
+  			projectId: "vollers-a7c79",
+  			storageBucket: "vollers-a7c79.appspot.com",
+  			messagingSenderId: "507955927643",
 		};
 
 		firebase.initializeApp(config);
+
+		// firebase.auth().signInWithEmailAndPassword("penaneto@gmail.com", "123123")
+		// .then(user => {console.log("User auth: ", user)} )
+		// .catch(error => {console.log("User error: ", error)} );
 	}
 
 	onChangeText(field, value) {
@@ -87,7 +91,7 @@ class LoginPage extends Component {
 		}
 
 		if (password.trim().length < 6) {
-			this.setState( { response: `Senha precisa ter pelo menos 6 caracteres!` } );
+			this.setState( { response: `Senha precisa ser de menos 6 caracteres!` } );
 
 			return false;
 		}
@@ -126,7 +130,7 @@ class LoginPage extends Component {
 			return (<ActivityIndicator />);
 		}
 
-		let label = this.state.loginForm ? 'Acessar' : 'Registrar';
+		let label = this.state.loginForm ? 'Acessar' : 'Cadastrar';
 
 		return (
 			<TouchableOpacity

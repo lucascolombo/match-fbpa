@@ -42,7 +42,7 @@ export default createStackNavigator({
   },
 }, {
   navigationOptions: {
-    title: "FUTPOA",
+    title: "VOLLERS",
     headerTintColor: '#ffffff',
     headerStyle: {
       backgroundColor: '#00796b'

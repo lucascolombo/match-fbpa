@@ -102,7 +102,16 @@ class MainPage extends Component {
 	}
 
 	renderMatchList() {
-		return this.props.matchList.map( match => { return this.renderCard(match) } );
+		let matchList =  this.props.matchList;
+		if (matchList)
+			return matchList.map( match => { 
+				if(match) {
+					console.log(match);
+					return this.renderCard(match);
+				}
+				else
+					console.log("Houve um erro ao puxar match")
+		} );
 	}
 
 	render() {
